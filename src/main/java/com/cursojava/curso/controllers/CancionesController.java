@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 
-
+/**
+ * Controlador para gestionar operaciones relacionadas con la entidad {@link Canciones}.
+ */
 @RestController
 public class CancionesController {
-
 
     @Autowired
     private CancionesDao cancionesDao;
@@ -24,18 +25,38 @@ public class CancionesController {
     @Autowired
     private JWTUtil jwtUtil;
 
+    /**
+     * Obtiene una lista de canciones asociadas al usuario que realiza la solicitud.
+     *
+     * @param token Token de autorización que contiene la información del usuario.
+     * @return Lista de canciones asociadas al usuario.
+     */
     @RequestMapping(value = "api/canciones", method = RequestMethod.GET)
     public List<Canciones> getCancionesById(@RequestHeader(value = "Authorization") String token) {
         String usuarioId = jwtUtil.getKey(token);
         return cancionesDao.findByUsuarioId(Long.valueOf(usuarioId));
     }
 
+    /**
+     * Elimina una canción específica basándose en su ID.
+     *
+     * @param token Token de autorización que contiene la información del usuario.
+     * @param id    ID de la canción a eliminar.
+     */
     @RequestMapping(value = "api/canciones/{id}", method = RequestMethod.DELETE)
     public void eliminar(@RequestHeader(value = "Authorization") String token,
                          @PathVariable Long id) {
         Canciones canciones = cancionesDao.getById(id);
         cancionesDao.delete(canciones);
     }
+
+    /**
+     * Agrega una nueva canción a la base de datos.
+     *
+     * @param token         Token de autorización que contiene la información del usuario.
+     * @param nuevaCancion  Objeto {@link Canciones} que representa la nueva canción a agregar.
+     * @return              La canción guardada en la base de datos.
+     */
     @RequestMapping(value = "api/canciones", method = RequestMethod.POST)
     public Canciones agregarCancion(@RequestHeader(value = "Authorization") String token,
                                     @RequestBody Canciones nuevaCancion) {
@@ -54,8 +75,4 @@ public class CancionesController {
 
         return cancionGuardada;
     }
-
-
 }
-
-

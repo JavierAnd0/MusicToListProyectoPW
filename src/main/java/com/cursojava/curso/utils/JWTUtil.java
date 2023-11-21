@@ -15,10 +15,11 @@ import java.security.Key;
 import java.util.Date;
 
 /**
- * @author Mahesh
+ * Utilidad para la creación, validación y lectura de JSON Web Tokens (JWT).
  */
 @Component
 public class JWTUtil {
+
     @Value("${security.jwt.secret}")
     private String key;
 
@@ -28,29 +29,27 @@ public class JWTUtil {
     @Value("${security.jwt.ttlMillis}")
     private long ttlMillis;
 
-    private final Logger log = LoggerFactory
-            .getLogger(JWTUtil.class);
+    private final Logger log = LoggerFactory.getLogger(JWTUtil.class);
 
     /**
-     * Create a new token.
+     * Crea un nuevo token JWT.
      *
-     * @param id
-     * @param subject
-     * @return
+     * @param id      Identificador único para el token.
+     * @param subject Sujeto del token (por ejemplo, el nombre de usuario).
+     * @return Token JWT generado.
      */
     public String create(String id, String subject) {
-
-        // The JWT signature algorithm used to sign the token
+        // Algoritmo de firma utilizado para firmar el token JWT
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
 
-        //  sign JWT with our ApiKey secret
+        // Firma el JWT con el secreto de la clave API
         byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(key);
         Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
-        //  set the JWT Claims
+        // Configura las reclamaciones del JWT
         JwtBuilder builder = Jwts.builder().setId(id).setIssuedAt(now).setSubject(subject).setIssuer(issuer)
                 .signWith(signatureAlgorithm, signingKey);
 
@@ -60,19 +59,18 @@ public class JWTUtil {
             builder.setExpiration(exp);
         }
 
-        // Builds the JWT and serializes it to a compact, URL-safe string
+        // Construye el JWT y lo serializa a una cadena compacta y segura para URL
         return builder.compact();
     }
 
     /**
-     * Method to validate and read the JWT
+     * Método para validar y leer el JWT, devolviendo el valor del sujeto.
      *
-     * @param jwt
-     * @return
+     * @param jwt Token JWT a validar y leer.
+     * @return Valor del sujeto extraído del token.
      */
     public String getValue(String jwt) {
-        // This line will throw an exception if it is not a signed JWS (as
-        // expected)
+        // Esta línea lanzará una excepción si no es un JWS firmado (como se espera)
         Claims claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(key))
                 .parseClaimsJws(jwt).getBody();
 
@@ -80,14 +78,13 @@ public class JWTUtil {
     }
 
     /**
-     * Method to validate and read the JWT
+     * Método para validar y leer el JWT, devolviendo el valor del identificador único.
      *
-     * @param jwt
-     * @return
+     * @param jwt Token JWT a validar y leer.
+     * @return Valor del identificador único extraído del token.
      */
     public String getKey(String jwt) {
-        // This line will throw an exception if it is not a signed JWS (as
-        // expected)
+        // Esta línea lanzará una excepción si no es un JWS firmado (como se espera)
         Claims claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(key))
                 .parseClaimsJws(jwt).getBody();
 

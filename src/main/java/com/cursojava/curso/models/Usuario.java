@@ -7,29 +7,45 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
+/**
+ * Clase que representa a un usuario en la aplicación.
+ */
 @Entity
 @Table(name = "usuarios")
-@ToString @EqualsAndHashCode
+@ToString
+@EqualsAndHashCode
 public class Usuario {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Getter @Setter @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
+    @Column(name = "id")
     private Long id;
 
-    @Getter @Setter @Column(name = "nombre")
+    @Getter
+    @Setter
+    @Column(name = "nombre")
     private String nombre;
 
-    @Getter @Setter @Column(name = "apellido")
+    @Getter
+    @Setter
+    @Column(name = "apellido")
     private String apellido;
 
-    @Getter @Setter @Column(name = "email")
+    @Getter
+    @Setter
+    @Column(name = "email")
     private String email;
 
-    @Getter @Setter @Column(name = "telefono")
+    @Getter
+    @Setter
+    @Column(name = "telefono")
     private String telefono;
 
-    @Getter @Setter @Column(name = "password")
+    @Getter
+    @Setter
+    @Column(name = "password")
     private String password;
 
 }

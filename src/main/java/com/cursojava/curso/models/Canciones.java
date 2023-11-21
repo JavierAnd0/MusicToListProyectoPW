@@ -8,6 +8,9 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * Clase que representa una canción en la aplicación.
+ */
 @Entity
 @Table(name = "Canciones")
 @ToString
@@ -20,6 +23,7 @@ public class Canciones {
         @GeneratedValue(strategy= GenerationType.IDENTITY)
         @Column(name = "id")
         private Long id;
+
         @ManyToOne(optional = false)
         @JoinColumn(name="usuario_id",nullable = false, foreignKey = @ForeignKey(name = "fk_Canciones"))
         private Usuario usuario;
@@ -39,5 +43,4 @@ public class Canciones {
         @Column(name = "link")
         private String link;
 
-    }
-
+}
