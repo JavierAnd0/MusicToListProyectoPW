@@ -21,9 +21,10 @@ async function iniciarSesion() {
   if (respuesta != 'FAIL') {
     localStorage.token = respuesta;
     localStorage.email = datos.email;
-    window.location.href = 'usuarios.html'
+    window.location.href = 'Canciones.html'
   } else {
     alert("Las credenciales son incorrectas. Por favor intente nuevamente.");
   }
 
 }
+

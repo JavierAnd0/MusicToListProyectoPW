@@ -12,6 +12,12 @@ async function registrarUsuario() {
 
   let repetirPassword = document.getElementById('txtRepetirPassword').value;
 
+  // Verifica que todos los campos estén llenos
+  if (!datos.nombre || !datos.apellido || !datos.email || !datos.password || !repetirPassword) {
+    alert('Todos los campos deben estar llenos.');
+    return;
+  }
+
   if (repetirPassword != datos.password) {
     alert('La contraseña que escribiste es diferente.');
     return;
@@ -27,5 +33,4 @@ async function registrarUsuario() {
   });
   alert("La cuenta fue creada con exito!");
   window.location.href = 'login.html'
-
 }

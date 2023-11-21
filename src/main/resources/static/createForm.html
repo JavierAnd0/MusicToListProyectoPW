@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Canción</title>
+</head>
+<body>
+
+<h1>Editar Canción</h1>
+
+<form action="api/canciones/actualizar" method="post">
+    <input type="hidden" name="id" value="{{ cancion.id }}">
+    <input type="text" name="titulo" value="{{ cancion.titulo }}">
+    <input type="text" name="album" value="{{ cancion.album }}">
+    <input type="text" name="descripcion" value="{{ cancion.descripcion }}">
+    <input type="text" name="fecha_agregada" value="{{ cancion.fecha_agregada }}">
+    <input type="text" name="link" value="{{ cancion.link }}">
+    <input type="submit" value="Guardar">
+</form>
+
+</body>
+</html>

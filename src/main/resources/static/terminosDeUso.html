@@ -23,6 +23,7 @@
               <label for="check" class="close-menu"><i class="fas fa-times"></i></label>
           </span>
             <label for="check" class="open-menu"><i class="fas fa-bars"></i></label>
+            <div id="google_translate_element">
         </ul>
     </nav>
 </header>
@@ -133,9 +134,9 @@
             <img src="/imagenes/NuevoLogo.ico" alt="Logo">
         </div>
         <div class="footer-links">
-            <a href="#">Terminos de Uso</a>
-            <a href="#">Contacto</a>
-            <a href="/ProyectoHtml/declaracionPrivacidad.html">Privacidad</a>
+            <a href="/terminosDeUso.html">Terminos de Uso</a>
+            <a href="/contacto.html">Contacto</a>
+            <a href="/declaracionPrivacidad.html">Privacidad</a>
         </div>
         <div class="footer-social">
             <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -144,6 +145,19 @@
         </div>
     </div>
 </footer>
+
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'es',
+            includedLanguages: 'en,es,fr',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        }, 'google_translate_element');
+    }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 <script src="/javascript/inicio01.js"></script>
 <script src="https://kit.fontawesome.com/e4deb44257.js" crossorigin="anonymous"></script>
 </body>
